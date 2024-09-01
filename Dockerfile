@@ -3,8 +3,10 @@ ARG RUBY_VERSION=ruby:3.2.5
 FROM $RUBY_VERSION
 ARG RAILS_ENV
 ARG RAILS_MASTER_KEY
+ARG DATABASE_URL
 ENV RAILS_ENV $RAILS_ENV
 ENV RAILS_MASTER_KEY $RAILS_MASTER_KEY
+ENV DATABASE_URL $DATABASE_URL
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 RUN env
@@ -29,8 +31,8 @@ RUN bundle install
 RUN yarn install
 COPY . /app
 
-
 RUN bundle exec rails assets:precompile
+RUN bundle exec rails db:prepare
 
 EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
