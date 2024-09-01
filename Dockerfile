@@ -1,8 +1,9 @@
 ARG RUBY_VERSION=ruby:3.2.5
-FROM $RUBY_VERSION
 
+FROM $RUBY_VERSION
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
+RUN env
 
 RUN apt-get update -qq \
     && apt-get install -y ca-certificates curl gnupg \
@@ -23,6 +24,7 @@ COPY yarn.lock /app/yarn.lock
 RUN bundle install
 RUN yarn install
 COPY . /app
+
 
 RUN bundle exec rails assets:precompile
 
