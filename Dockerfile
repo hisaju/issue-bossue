@@ -1,12 +1,16 @@
 ARG RUBY_VERSION=ruby:3.2.5
 
 FROM $RUBY_VERSION
+ARG RAILS_ENV
+ARG RAILS_MASTER_KEY
+ENV RAILS_ENV $RAILS_ENV
+ENV RAILS_MASTER_KEY $RAILS_MASTER_KEY
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 RUN env
 
 RUN apt-get update -qq \
-    && apt-get install -y ca-certificates curl gnupg \
+    && apt-get install -y ca-certificates curl gnupg apt-utils \
     && mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
     && NODE_MAJOR=20 \
