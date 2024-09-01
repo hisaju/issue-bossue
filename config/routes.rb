@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   get 'auth/github/callback', to: 'sessions#callback'
 
+  namespace :user, shallow: true do
+    root 'dashboards#index'
+  end
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/*
