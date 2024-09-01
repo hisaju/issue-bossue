@@ -1,7 +1,5 @@
 class TopsController < ApplicationController
 
-  def index
-    render plain: 'Hello, World!'
-  end
+  def index; end
 
 end

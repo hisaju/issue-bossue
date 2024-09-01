@@ -10,8 +10,10 @@ services:
     ports:
       - 5432:5432
   web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bash -c "bundle install && bundle exec rails db:prepare && rm -f tmp/pids/server.pid && yarn install && ./bin/dev"
     tty: true
     stdin_open: true
     volumes:
@@ -20,8 +22,6 @@ services:
       - node_modules:/app/node_modules
     environment:
       TZ: Asia/Tokyo
-      RAILS_ENV: production
-      RAILS_MASTER_KEY: 004628ba6edb0fd9393e07fc0c6965dd
     ports:
       - "3000:3000"
     depends_on:
