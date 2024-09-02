@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    env_file: ./.env
+      # env_file: ./.env
     environment:
       EDITOR: vim
         # build:
