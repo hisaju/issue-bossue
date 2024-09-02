@@ -82,5 +82,5 @@ test:
 #
 production:
   <<: *default
-  database: app_production
+  database: issue-bossue
   url: <%= ENV["DATABASE_URL"] %>
