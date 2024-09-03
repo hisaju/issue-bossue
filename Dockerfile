@@ -32,7 +32,7 @@ RUN yarn install
 COPY . /app
 
 RUN bundle exec rails assets:precompile
-RUN bundle exec rails db:prepare
+#RUN bundle exec rails db:prepare
 
 EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
