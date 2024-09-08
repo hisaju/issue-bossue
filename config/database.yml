@@ -20,8 +20,8 @@ test:
 production:
   <<: *default
   database: 'issue-bossue'
-  #url: <%= ENV["DATABASE_URL"] %>
-  host: 'db'
-  username: 'postgres'
-  password: 'password'
+  url: <%= ENV["DATABASE_URL"] %>
+  # host: 'db'
+  # username: 'postgres'
+  # password: 'password'
 
