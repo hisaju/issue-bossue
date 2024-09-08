@@ -32,7 +32,7 @@ RUN yarn install
 COPY . /app
 
 RUN bundle exec rails assets:precompile
-# ENTRYPOINT ["/app/bin/docker-entrypoint"]
+ENTRYPOINT ["/app/bin/docker-entrypoint"]
 
 EXPOSE 3000
 CMD ["rails", "server", "-b", "0.0.0.0"]
