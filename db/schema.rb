@@ -20,25 +20,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_095152) do
     t.text "content"
     t.integer "status", default: 0
     t.string "repository_id", null: false
-    t.string "issue_number", null: false
+    t.string "repository_name", null: false
+    t.string "issue_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "bossue_sentence"
     t.index ["user_id"], name: "index_bossues_on_user_id"
-  end
-
-  create_table "issues", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "title"
-    t.text "description"
-    t.integer "status", default: 0
-    t.string "repository_id", null: false
-    t.string "repository_name", null: false
-    t.string "issue_id", null: false
-    t.string "issue_url", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_issues_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,5 +38,4 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_095152) do
   end
 
   add_foreign_key "bossues", "users"
-  add_foreign_key "issues", "users"
 end

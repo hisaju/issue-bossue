@@ -158,6 +158,8 @@ GEM
     nio4r (2.7.3)
     nokogiri (1.16.7-aarch64-linux)
       racc (~> 1.4)
+    nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
@@ -238,6 +240,7 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
+    redcarpet (3.6.0)
     redis (5.3.0)
       redis-client (>= 0.22.0)
     redis-actionpack (5.4.0)
@@ -320,6 +323,8 @@ GEM
     strscan (3.1.0)
     tailwindcss-rails (2.7.3-aarch64-linux)
       railties (>= 7.0.0)
+    tailwindcss-rails (2.7.3-arm64-darwin)
+      railties (>= 7.0.0)
     tailwindcss-rails (2.7.3-x86_64-linux)
       railties (>= 7.0.0)
     temple (0.10.3)
@@ -352,6 +357,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -371,6 +377,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.1)
+  redcarpet
   redis
   redis-actionpack
   rubocop-rails-omakase
