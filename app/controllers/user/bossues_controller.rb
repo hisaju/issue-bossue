@@ -1,10 +1,12 @@
 class User::BossuesController < User::BaseController
 
+  before_action :set_bossue, only: [:edit, :show, :update]
+
   def index
   end
 
   def new
-    @bossue = Bossue.new
+    @bossue = current_user.bossues.new
     @repositories = github_client.repositories({}, per_page: 500).map{|repo| [repo.full_name, repo.id]}
   end
 
@@ -21,10 +23,34 @@ class User::BossuesController < User::BaseController
     render json: {title: issue.title, body: issue.body}
   end
 
+  def edit; end
 
-  def edit
+  def show; end
+
+  def create
+    @bossue = current_user.bossues.new(bossue_params)
+    if @bossue.save
+      redirect_to user_bossues_path
+    else
+      render :new
+    end
   end
 
-  def show
+  def update
+    if @bossue.update(bossue_params)
+      redirect_to user_bossues_path
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  def set_bossue
+    @bossue = current_user.bossues.find(params[:id])
+  end
+
+  def bossue_params
+    params.require(:bossue).permit(:title, :content, :issue_number, :repository_id)
   end
 end
