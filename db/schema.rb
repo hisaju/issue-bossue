@@ -20,8 +20,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_062046) do
     t.text "content"
     t.integer "status", default: 0
     t.string "repository_id", null: false
-    t.string "repository_name", null: false
-    t.string "issue_id", null: false
+    t.string "issue_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_bossues_on_user_id"
