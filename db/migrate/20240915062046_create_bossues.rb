@@ -6,8 +6,7 @@ class CreateBossues < ActiveRecord::Migration[7.2]
       t.text :content
       t.integer :status, default: 0
       t.string :repository_id, null: false
-      t.string :repository_name, null: false
-      t.string :issue_id, null: false
+      t.string :issue_number, null: false
       t.timestamps
     end
   end
