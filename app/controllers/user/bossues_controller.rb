@@ -3,6 +3,7 @@ class User::BossuesController < User::BaseController
   before_action :set_bossue, only: [:edit, :show, :update]
 
   def index
+    @bossues = Bossue.all
   end
 
   def new
@@ -32,6 +33,7 @@ class User::BossuesController < User::BaseController
     if @bossue.save
       redirect_to user_bossues_path
     else
+      @repositories = github_client.repositories({}, per_page: 500).map{|repo| [repo.full_name, repo.id]}
       render :new
     end
   end
@@ -51,6 +53,6 @@ class User::BossuesController < User::BaseController
   end
 
   def bossue_params
-    params.require(:bossue).permit(:title, :content, :issue_number, :repository_id)
+    params.require(:bossue).permit(:title, :content, :issue_number, :repository_id, :bossue_sentence)
   end
 end
