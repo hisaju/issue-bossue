@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_17_005450) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_17_010225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bossue_applications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "bossue_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bossue_id"], name: "index_bossue_applications_on_bossue_id"
+    t.index ["user_id"], name: "index_bossue_applications_on_user_id"
+  end
 
   create_table "bossues", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -27,16 +37,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_005450) do
     t.index ["user_id"], name: "index_bossues_on_user_id"
   end
 
-  create_table "issue_applies", force: :cascade do |t|
-    t.bigint "bossue_id", null: false
-    t.bigint "user_id", null: false
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bossue_id"], name: "index_issue_applies_on_bossue_id"
-    t.index ["user_id"], name: "index_issue_applies_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "uid"
@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_005450) do
     t.string "thumbnail_url"
   end
 
+  add_foreign_key "bossue_applications", "bossues"
+  add_foreign_key "bossue_applications", "users"
   add_foreign_key "bossues", "users"
-  add_foreign_key "issue_applies", "bossues"
-  add_foreign_key "issue_applies", "users"
 end
