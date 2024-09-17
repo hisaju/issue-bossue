@@ -1,5 +1,6 @@
 class Bossue < ApplicationRecord
   belongs_to :user
+  has_many :bossue_applications, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 200 }
   validates :content, presence: true, length: { maximum: 500 }
