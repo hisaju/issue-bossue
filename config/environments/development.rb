@@ -79,8 +79,8 @@ Rails.application.configure do
     url: 'redis://redis:6379/0',
     namespace: 'issue-dev-session'
   }
-  config.middleware.use ActionDispatch::Cookies
-  config.middleware.use ActionDispatch::Session::RedisStore, config.session_options
+  #config.middleware.use ActionDispatch::Cookies
+  #config.middleware.use ActionDispatch::Session::RedisStore, config.session_options
   config.web_console.allowed_ips = '0.0.0.0/0'
 
 end

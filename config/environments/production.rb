@@ -80,8 +80,8 @@ Rails.application.configure do
     url: ENV['REDIS_URL'],
     namespace: 'issue-session'
   }
-  config.middleware.use ActionDispatch::Cookies
-  config.middleware.use ActionDispatch::Session::RedisStore, config.session_options
+  #config.middleware.use ActionDispatch::Cookies
+  #config.middleware.use ActionDispatch::Session::RedisStore, config.session_options
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
