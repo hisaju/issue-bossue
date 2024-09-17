@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :bossues do
       get :issues, on: :collection
       get '/issues/:issue_number', to: 'bossues#issue', as: 'issue', on: :collection
+      resources :bossue_applications, only: %i[create]
     end
   end
 
