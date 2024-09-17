@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_15_095152) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_17_005450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,12 +20,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_095152) do
     t.text "content"
     t.integer "status", default: 0
     t.string "repository_id", null: false
-    t.string "repository_name", null: false
-    t.string "issue_id", null: false
+    t.string "issue_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "bossue_sentence"
     t.index ["user_id"], name: "index_bossues_on_user_id"
+  end
+
+  create_table "issue_applies", force: :cascade do |t|
+    t.bigint "bossue_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bossue_id"], name: "index_issue_applies_on_bossue_id"
+    t.index ["user_id"], name: "index_issue_applies_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,4 +47,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_095152) do
   end
 
   add_foreign_key "bossues", "users"
+  add_foreign_key "issue_applies", "bossues"
+  add_foreign_key "issue_applies", "users"
 end
