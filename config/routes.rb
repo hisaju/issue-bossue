@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   get 'auth/github/callback', to: 'sessions#callback'
 
   namespace :user, shallow: true do
-    root 'dashboards#index'
+    root 'bossues#index'
+    resources :bossues do
+      resources :comments, only: %i[create destroy]
+      get :issues, on: :collection
+      get '/issues/:issue_number', to: 'bossues#issue', as: 'issue', on: :collection
+      resources :bossue_applications, only: %i[create]
+    end
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

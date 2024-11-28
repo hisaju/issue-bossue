@@ -1,14 +1,15 @@
 class SessionsController < ApplicationController
-  def callback
-    user_info = request.env['omniauth.auth']
-    if user = User.from_omniauth(user_info)
+  # ソーシャルログイン処理
+  def create
+    auth = request.env['omniauth.auth']
+    if user = User.from_omni_auth(auth)
       session[:user_id] = user.id
-      session[:token] = user_info['credentials']['token']
-      redirect_to user_root_path
+      session[:token] = auth['credentials']['token']
+      redirect_to root_path, notice: 'ログインしました'
     else
-      flash[:notice] = "ログインに失敗しました。"
+      flash[:alert] = 'ログインに失敗しました'
       redirect_to tops_path
     end
+  end  
 
-  end
 end
