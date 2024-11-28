@@ -2,14 +2,13 @@ class User::BossueApplicationsController < User::BaseController
   before_action :set_bossue
 
   def create
-    @bossue_application = @bossue.bossue_applications.new(user: current_user)
+    @bossue_application = @bossue.bossue_applications.new(user_id: current_user.id)
     if @bossue_application.save
-      redirect_to user_bossue_path(@bossue), notice: '募集項目を作成しました'
+      redirect_to [:user, @bossue]
     else
-      redirect_to user_bossue_path(@bossue), alert: '募集項目の作成に失敗しました'
+      render 'user/bossues/show'
     end
   end
-
 
   private
 

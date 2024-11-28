@@ -36,6 +36,28 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_05_121054) do
     t.datetime "updated_at", null: false
     t.index ["bossue_id"], name: "index_comments_on_bossue_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "bossue_applications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "bossue_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bossue_id"], name: "index_bossue_applications_on_bossue_id"
+    t.index ["user_id"], name: "index_bossue_applications_on_user_id"
+  end
+
+  create_table "bossues", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "content"
+    t.integer "status", default: 0
+    t.string "repository_id", null: false
+    t.string "issue_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "bossue_sentence"
+    t.index ["user_id"], name: "index_bossues_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,6 +66,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_05_121054) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "thumbnail_url"
   end
 
   add_foreign_key "issues", "users"
@@ -52,4 +75,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_05_121054) do
   add_foreign_key "bossues", "users"
   add_foreign_key "comments", "bossues"
   add_foreign_key "comments", "users"
+  add_foreign_key "bossue_applications", "bossues"
+  add_foreign_key "bossue_applications", "users"
+  add_foreign_key "bossues", "users"
 end

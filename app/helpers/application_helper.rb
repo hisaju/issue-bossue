@@ -38,8 +38,11 @@ module ApplicationHelper
       }
     }
   end
+<<<<<<< HEAD
 
   def test
     "test"
   end
+=======
+>>>>>>> main
 end

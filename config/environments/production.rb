@@ -46,7 +46,7 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  # config.assume_ssl = true
+  config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = false
@@ -67,6 +67,8 @@ Rails.application.configure do
   # want to log everything, set the level to "debug".
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
+  config.action_controller.forgery_protection_origin_check = false
+
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
   config.cache_store = :redis_cache_store, {
@@ -78,8 +80,8 @@ Rails.application.configure do
     url: ENV['REDIS_URL'],
     namespace: 'issue-session'
   }
-  config.middleware.use ActionDispatch::Cookies
-  config.middleware.use ActionDispatch::Session::RedisStore, config.session_options
+  #config.middleware.use ActionDispatch::Cookies
+  #config.middleware.use ActionDispatch::Session::RedisStore, config.session_options
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque

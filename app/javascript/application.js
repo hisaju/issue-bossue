@@ -2,5 +2,5 @@
 import { Turbo } from "@hotwired/turbo-rails"
 
 // サイト全体で無効にする
-Turbo.session.drive = false;
+//Turbo.session.drive = false;
 import "./controllers"
