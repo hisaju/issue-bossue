@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :user, shallow: true do
     root 'bossues#index'
     resources :bossues do
+      resources :comments, only: %i[create destroy]
       get :issues, on: :collection
       get '/issues/:issue_number', to: 'bossues#issue', as: 'issue', on: :collection
       resources :bossue_applications, only: %i[create]

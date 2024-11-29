@@ -1,6 +1,7 @@
 class Bossue < ApplicationRecord
   belongs_to :user
   has_many :bossue_applications, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 200 }
   validates :content, presence: true, length: { maximum: 500 }
@@ -9,4 +10,12 @@ class Bossue < ApplicationRecord
   validates :bossue_sentence, presence: true, length: { maximum: 200 }
 
   enum status: { open: 0, closed: 1, matched: 2 }
+
+  def bossue_closed?
+    closed? || matched?
+  end
+
+  def bossue_open?
+    open? && title?
+  end
 end
